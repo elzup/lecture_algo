@@ -37,7 +37,6 @@ public class HashOpenAddressing {
 			sum += (int) key.charAt(i);
 		return sum % bucketSize;
 	}
-
 	public int rehash(int hash) {
 		// ここを作る
 		return (hash + 1) % bucketSize;
