@@ -3,11 +3,10 @@ package ex08;
 import java.util.Deque;
 import java.util.LinkedList;
 
-
 public class ReversePolish {
 	// ここを作る スタックを作成する
 	public static Deque<String> stack = new LinkedList<String>();
-//	public static Deque<ReversePolish> stack = new LinkedList<ReversePolish>();
+	//	public static Deque<ReversePolish> stack = new LinkedList<ReversePolish>();
 
 	private String label;
 	private ReversePolish left;
@@ -15,7 +14,7 @@ public class ReversePolish {
 
 	public ReversePolish(String label, ReversePolish left, ReversePolish right) {
 		this.label = label;
-		this.left = left;
+		this.left  = left;
 		this.right = right;
 	}
 
@@ -47,28 +46,28 @@ public class ReversePolish {
 		// なぞったノードで演算を行う
 		// ノードのlabelが演算子であれば・・・
 		// ノードのlabelが数字であれば・・・
-		if (label == "*" || label == "+" || label == "-") {
-			int a = Integer.parseInt(stack.pop());
-			int b = Integer.parseInt(stack.pop());
-			switch (label) {
-			case "+":
-				System.out.println(a + "+" + b);
-				stack.push(String.valueOf(a + b));
-				break;
-			case "*":
-				System.out.println(a + "*" + b);
-				stack.push(String.valueOf(a * b));
-				break;
-			case "-":
-				System.out.println(a + "-" + b);
-				stack.push(String.valueOf(a - b));
-				break;
-			}
-		} else {
+
+		int a = Integer.parseInt(stack.pop());
+		int b = Integer.parseInt(stack.pop());
+		switch (label) {
+		case "+":
+			System.out.println(a + "+" + b);
+			stack.push(String.valueOf(a + b));
+			break;
+		case "*":
+			System.out.println(a + "*" + b);
+			stack.push(String.valueOf(a * b));
+			break;
+		case "-":
+			System.out.println(a + "-" + b);
+			stack.push(String.valueOf(a - b));
+			break;
+		default:
 			stack.push(label);
-			System.out.println(label);
+			break;
 		}
-		System.out.println(":" + stack.getLast());
+
+		//		System.out.println(":" + stack.getLast());
 	}
 
 	public void traversePostorder(ReversePolish n) {
