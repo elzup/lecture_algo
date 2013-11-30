@@ -1,27 +1,27 @@
 package ex07;
 
 public class Element <T>{
-	private Element next;
-	private Element previous;
+	private Element<T> next;
+	private Element<T> previous;
 	private T data;
 	public Element (T data) {
 		this.data = data;
 	}
 
-	public Element setNext(Element next) {
+	public Element<T> setNext(Element<T> next) {
 		this.next = next;
 		return next;
 	}
 
-	public Element getNext() {
+	public Element<T> getNext() {
 		return next;
 	}
 
-	public Element setPrevious(Element previous) {
+	public Element<T> setPrevious(Element<T> previous) {
 		this.previous = previous;
 		return previous;
 	}
-	public Element getPrevious() {
+	public Element<T> getPrevious() {
 		return this.previous;
 	}
 
