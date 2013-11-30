@@ -1,6 +1,5 @@
 package ex11;
 
-
 public class BinarySearchTree {
 	private class BTNode {
 		Integer data;
