@@ -11,10 +11,12 @@ public class binarysearch {
 	private final int n = 9999;
 	private int[] table = new int[n];
 
+	private static String input_directory = "./src/ex09/data/";
+	private static String file_name = "rand.txt";
+
 	public binarysearch(String filename) {
 		try {
 			// ここを作る
-
 			boolean sorted = true;
 			BufferedReader br = new BufferedReader(new FileReader(new File(filename)));
 			String k;
@@ -24,8 +26,7 @@ public class binarysearch {
 				if (sorted && i != 0 && this.table[i - 1] > this.table[i]) sorted = false;
 			}
 			if (!sorted)
-				Arrays.sort(this.table);
-
+				Arrays.sort(this.table);		//ソート
 		} catch (FileNotFoundException e) {
 			System.out.println(filename + "が見つかりません。");
 		} catch (IOException e) {
@@ -62,7 +63,7 @@ public class binarysearch {
 	}
 
 	public static void main(String[] args) {
-		String filename = "rand.txt";
+		String filename = input_directory + file_name;
 		binarysearch table = new binarysearch(filename);
 
 		table.show();
