@@ -4,6 +4,8 @@ import java.io.File;
 
 public class PrintDirectory {
 
+	public static String target_path = "./";
+
 	public static void printDir(File dir) {;
 		File file = new File(dir.getPath());
 		File[] nodes = file.listFiles();
@@ -15,7 +17,7 @@ public class PrintDirectory {
 	}
 
 	public static void main(String... args) {
-		String path = ".";
+		String path = target_path;
 		File dir = new File(path);
 		printDir(dir);
 	}

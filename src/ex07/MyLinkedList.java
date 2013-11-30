@@ -1,8 +1,8 @@
 package ex07;
 
 public class MyLinkedList <T>{
-	private Element head;
-	private Element tail;
+	private Element<T> head;
+	private Element<T> tail;
 
 
 	public MyLinkedList() {
@@ -11,7 +11,7 @@ public class MyLinkedList <T>{
 	}
 
 	public int size() {
-		Element p = head;
+		Element<T> p = head;
 		int s = 0;
 		while (p != null) {
 			p = p.getNext();
@@ -22,12 +22,12 @@ public class MyLinkedList <T>{
 
 	public void addFirst(T val) {
 		if (head == null) {
-			head = new Element(val);
+			head = new Element<T>(val);
 			tail = head;
 			return;
 		} else {
-			Element h = head;
-			head = new Element(val);
+			Element<T> h = head;
+			head = new Element<T>(val);
 			h.setPrevious(head);
 			head.setNext(h);
 		}
@@ -35,12 +35,12 @@ public class MyLinkedList <T>{
 
 	public void addLast(T str) {
 		if (head == null) {
-			head = new Element(str);
+			head = new Element<T>(str);
 			tail = head;
 			return;
 		} else {
-			Element t = tail;
-			tail = new Element(str);
+			Element<T> t = tail;
+			tail = new Element<T>(str);
 			tail.setPrevious(t);
 			t.setNext(tail);
 		}
@@ -56,14 +56,12 @@ public class MyLinkedList <T>{
 		} else if (index == size()) {
 			this.addLast(str);
 		} else {
-			Element p = head;
-			int i = 0;
-			while(i != index) {
+			Element<T> p = head;
+			int i = 1;
+			while(i++ != index)
 				p = p.getNext();
-			}
-			p = p.getPrevious();
-			Element newE = new Element(str);
-			Element n = p.getNext();
+			Element<T> newE = new Element<T>(str);
+			Element<T> n = p.getNext();
 			newE.setNext(n);
 			newE.setPrevious(p);
 			p.setNext(newE);
@@ -77,12 +75,12 @@ public class MyLinkedList <T>{
 			return null;
 		}
 		if (head.getNext() == null) {
-			Element target = head;
+			Element<T> target = head;
 			head = null;
 			tail = null;
 			return (T) target.getData();
 		}
-		Element h = head;
+		Element<T> h = head;
 		head = head.getNext();
 		head.setPrevious(null);
 		return (T) h.getData();
@@ -94,39 +92,45 @@ public class MyLinkedList <T>{
 			return null;
 		}
 		if (head.getNext() == null) {
-			Element target = head;
+			Element<T> target = head;
 			head = null;
 			tail = null;
 			return (T) target.getData();
 		}
-		Element t = tail;
+		Element<T> t = tail;
 		tail = t.getPrevious();
 		tail.setNext(null);
 		return (T) t.getData();
 	}
 
 	public T remove(int index) {
-		if (index < 0 || index > size()) {
+		if (index == 0 )
+			return removeFirst();
+		else if (index == size() - 1)
+			return removeLast();
+		else if (this.size() == 0) {
+			System.out.println("リストは空です");
+			return null;
+		} else if (index < 0 || index >= size()) {
 			System.out.println("インデックスが範囲外です。");
 			return null;
 		}
-		if (index == 0 ) {
-			return removeFirst();
-		} else if (index == size() - 1) {
-			return removeLast();
 
-		}
-		Element p = head;
-		int i = 0;
-		while(i != index) {
-			i++;
+		Element<T> p = head;
+		int i = 1;
+		while(i++ <= index)
 			p = p.getNext();
-		}
-		Element target = p;
+
+		System.out.println(p + ":" + index);
+//		if (p.getNext() == null)
+//			return this.removeLast();
+
+		T targetD = p.getData();
+		System.out.println(p);
 		p.getPrevious().setNext(p.getNext());
 		p.getNext().setPrevious(p.getPrevious());
 		p = null;
-		return (T) target.getData();
+		return (T) targetD;
 	}
 
 	public boolean contains(T str) {
@@ -134,7 +138,7 @@ public class MyLinkedList <T>{
 			System.out.println("null");
 			return false;
 		}
-		Element p = head;
+		Element<T> p = head;
 		while (p != null) {
 			if (p.getData() == str)return true;
 			p = p.getNext();
@@ -149,7 +153,7 @@ public class MyLinkedList <T>{
           System.out.println("null");
           return;
        }
-       Element p = head;
+       Element<T> p = head;
        while(p != null) {
           System.out.print(p + " -> ");
           p = p.getNext();
@@ -163,7 +167,7 @@ public class MyLinkedList <T>{
           System.out.println("null");
           return;
        }
-       Element p = tail;
+       Element<T> p = tail;
        while(p != null) {
           System.out.print(p + " -> ");
           p = p.getPrevious();
@@ -174,7 +178,7 @@ public class MyLinkedList <T>{
 	public static void main(String...args) {
 		// いろいろと試す
 		System.out.println("リストの生成");
-		MyLinkedList list = new MyLinkedList();
+		MyLinkedList<String> list = new MyLinkedList<String>();
 		list.print();
 		System.out.println("サイズ: " + list.size());
 		System.out.println("dを先頭に追加");
@@ -254,6 +258,62 @@ public class MyLinkedList <T>{
 		System.out.println("0番目を削除");
 		list.remove(0);
 		list.print();
+		System.out.println("end.");
+
+		System.out.println("------------------------");
+		System.out.println("リストの生成[数字]");
+		MyLinkedList<Integer> listInteger = new MyLinkedList<Integer>();
+		listInteger.print();
+		System.out.println("サイズ: " + listInteger.size());
+		System.out.println("1を先頭に追加");
+		listInteger.addFirst(1);
+		listInteger.print();
+		System.out.println("eを最後に追加");
+		listInteger.addLast(2);
+		listInteger.print();
+		listInteger.printReverse();
+		System.out.println("3を先頭に追加");
+		listInteger.addFirst(3);
+		listInteger.print();
+		listInteger.printReverse();
+		System.out.println("fが含まれているか?: " + listInteger.contains(2));
+		System.out.println("bが含まれているか?: " + listInteger.contains(1));
+		System.out.println("dが含まれているか?: " + listInteger.contains(10));
+		System.out.println("zが含まれているか?: " + listInteger.contains(4));
+		listInteger.print();
+		System.out.println("先頭を削除");
+		listInteger.removeFirst();
+		listInteger.print();
+		System.out.println("最後を削除");
+		listInteger.removeLast();
+		listInteger.print();
+		System.out.println("先頭を削除");
+		listInteger.removeFirst();
+		listInteger.print();
+		System.out.println("0番目に1を追加");
+		listInteger.add(0, 1);
+		listInteger.print();
+		System.out.println("1番目に4を追加");
+		listInteger.add(1, 4);
+		listInteger.print();
+		System.out.println("5番目に8を追加");
+		listInteger.add(5, 8);
+		listInteger.print();
+		listInteger.printReverse();
+		System.out.println("0番目を削除");
+		listInteger.remove(0);
+		listInteger.print();
+		System.out.println("サイズ: " + listInteger.size());
+		System.out.println("1番目を削除");
+		listInteger.remove(1);
+		listInteger.print();
+		System.out.println("2番目を削除");
+		listInteger.remove(2);
+		listInteger.print();
+		listInteger.printReverse();
+		System.out.println("0番目を削除");
+		listInteger.remove(0);
+		listInteger.print();
 		System.out.println("end.");
 	}
 }
