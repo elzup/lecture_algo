@@ -53,14 +53,19 @@ public class BTNode2 {
 //				new BTNode2("A", new BTNode2("B", new BTNode2("C", null, null), new BTNode2("E", null, null)),
 //						new BTNode2("D", new BTNode2("F", null, null), new BTNode2("G", null, null)));
 		BTNode2 tree =
-				new BTNode2("A", 
-				 new BTNode2("B", 
-				  new BTNode2("C", null, null)
-				, new BTNode2("D", 
-				   new BTNode2("E", 
-				    new BTNode2("G", null, null), null)
-    			 , new BTNode2("F", null, null)))
-				, new BTNode2("H", null, null));
+				new BTNode2("A",
+					new BTNode2("B",
+						new BTNode2("C", null, null),
+						new BTNode2("D",
+							new BTNode2("E",
+								new BTNode2("G", null, null),
+								null
+							),
+							new BTNode2("F", null, null)
+						)
+					),
+					new BTNode2("H", null, null)
+				);
 		System.out.println("行きがけ順");
 		tree.traversePreorder();
 		System.out.println();
