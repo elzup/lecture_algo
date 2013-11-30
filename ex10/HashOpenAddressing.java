@@ -33,9 +33,8 @@ public class HashOpenAddressing {
 
 	public int hash(String key) {
 		int sum = 0;
-		for (int i = 0; i < key.length(); i++) {
+		for (int i = 0; i < key.length(); i++)
 			sum += (int) key.charAt(i);
-		}
 		return sum % bucketSize;
 	}
 
@@ -61,9 +60,8 @@ public class HashOpenAddressing {
 			return false;
 		int h = hash(key);
 
-		while (this.table[h].key != EMPTY && this.table[h].key != REMOVED) {
+		while (this.table[h].key != EMPTY && this.table[h].key != REMOVED)
 			h = rehash(h);
-		}
 		this.table[h] = new MyKey(key, data);
 		this.n++;
 		return true;
