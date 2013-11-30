@@ -25,12 +25,6 @@ public class BinarySearchTree {
 				left.printNode(prefix + "\t");
 			}
 		}
-
-		public void putOn(BTNode n) {
-			this.data = n.data;
-			this.left = n.left;
-			this.right = n.right;
-		}
 	}
 
 	private BTNode root;
@@ -71,6 +65,7 @@ public class BinarySearchTree {
 			return newNode;
 		}
 
+		//一段上のノード(pare)を保存しておく（とても汚い）
 		BTNode pare;
 		int r;
 		do {
@@ -141,7 +136,7 @@ public class BinarySearchTree {
 		return true;
 	}
 
-	private BTNode removeMin(BTNode parent, BTNode p) {
+	private BTNode removeMin(BTNode parent, BTNode p) {		//second argument が謎
 		// 削除すべきノードが左右の子を持っているときに
 		// 最小のノードを探し出すメソッド
 		// ここを作成する
