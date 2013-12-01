@@ -15,6 +15,7 @@ public class GitPractice {
 
 		//Recursive(4);
 
+		/*
 		MatrixMultiple mm = new MatrixMultiple();
 		float[][] m1 = MatrixMultiple.createRndMatrix(3, 4);
 		float[][] m2 = MatrixMultiple.createRndMatrix(3, 3);
@@ -23,6 +24,7 @@ public class GitPractice {
 		mm.addMatrix(m1);
 		mm.addMatrix(m2);
 		MatrixMultiple.printMatrix(mm.multiple(), "%-3.2f");
+		*/
 
 
 
