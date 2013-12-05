@@ -12,11 +12,37 @@ public class TestSort {
 		// 各ファイルに対して，各ソートアルゴリズムを実行する
 		// 各アルゴリズムでソートする際に，その処理時間を測定する
 
-
-
-		start = System.currentTimeMillis();
 		// ここに処理時間を計測する処理を書く
-		stop = System.currentTimeMillis();
-		System.out.println((stop - start) + "[ms]");
+		String[] filenames = "rand2.txt,reverse2.txt,sorted2.txt,same2.txt".split(",");
+
+		for (String filename : filenames) {
+			System.out.println(filename + "のソート");
+			//------------------- bubbleSort -------------------//
+			start = System.currentTimeMillis();
+
+			BubbleSort bs = new BubbleSort(filename);
+			System.out.println("");
+			bs.sort();
+
+			stop = System.currentTimeMillis();
+			System.out.printf("%-10s：%5d[ms]\n", "バブルソート",(stop - start));
+			//------------------- selectionSort -------------------//
+			start = System.currentTimeMillis();
+
+			SelectionSort ss = new SelectionSort(filename);
+			ss.sort();
+
+			stop = System.currentTimeMillis();
+			System.out.printf("%-10s：%5d[ms]\n", "選択ソート",(stop - start));
+
+			//------------------- insertionSort -------------------//
+			start = System.currentTimeMillis();
+
+			InsertionSort is = new InsertionSort(filename);
+			is.sort();
+
+			stop = System.currentTimeMillis();
+			System.out.printf("%-10s：%5d[ms]\n", "挿入ソート",(stop - start));
+		}
 	}
 }
