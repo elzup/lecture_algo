@@ -38,14 +38,23 @@ public class InsertionSort {
 		// ここを作る
 		// 挿入ソートを実装する
 		// 配列arrayの中身をソートする
+//		for (int i = 1; i < n; i++) {
+//			int j = i;
+//			while (j > 0 && array[j - 1] > array[j]) {
+//				int t = array[j];
+//				array[j] = array[j - 1];
+//				array[j - 1] = t;
+//				j--;
+//			}
+//		}
 		for (int i = 1; i < n; i++) {
 			int j = i;
-			while (j > 0 && array[j - 1] > array[j]) {
-				int t = array[j];
+			int t = array[i];
+			while (j > 0 && array[j - 1] > t) {
 				array[j] = array[j - 1];
-				array[j - 1] = t;
 				j--;
 			}
+			array[j] = t;
 		}
 	}
 

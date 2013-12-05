@@ -19,28 +19,22 @@ public class TestSort {
 			System.out.println(filename + "のソート");
 			//------------------- bubbleSort -------------------//
 			start = System.currentTimeMillis();
-
 			BubbleSort bs = new BubbleSort(filename);
-			System.out.println("");
 			bs.sort();
-
 			stop = System.currentTimeMillis();
 			System.out.printf("%-10s：%5d[ms]\n", "バブルソート",(stop - start));
+
 			//------------------- selectionSort -------------------//
 			start = System.currentTimeMillis();
-
 			SelectionSort ss = new SelectionSort(filename);
 			ss.sort();
-
 			stop = System.currentTimeMillis();
 			System.out.printf("%-10s：%5d[ms]\n", "選択ソート",(stop - start));
 
 			//------------------- insertionSort -------------------//
 			start = System.currentTimeMillis();
-
 			InsertionSort is = new InsertionSort(filename);
 			is.sort();
-
 			stop = System.currentTimeMillis();
 			System.out.printf("%-10s：%5d[ms]\n", "挿入ソート",(stop - start));
 		}
