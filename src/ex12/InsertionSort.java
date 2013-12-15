@@ -1,77 +1,28 @@
 package ex12;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 
-public class InsertionSort {
+public class InsertionSort extends Sort {
 	private final int n = 50000;
-	private int[] array = new int[n];
+	private int[] a = new int[n];
 
-	private String file_path = "src/ex12/data/";
+	public static String FILE_PATH = "src/ex12/data/";
 
 	public InsertionSort(String filename) {
-		// ここを作る
-		// ファイル名を引数とする
-		// ファイルを開いて全て読み込んで配列arrayに入れる
-		try {
-			// ここを作る
-			BufferedReader br = new BufferedReader(new FileReader(new File(file_path + filename)));
-			String k;
-			for (int i = 0; i < n; i++) {
-				k = br.readLine();
-				this.array[i] = Integer.parseInt(k);
-			}
-		} catch (FileNotFoundException e) {
-			System.out.println(filename + "が見つかりません。");
-		} catch (IOException e) {
-			System.out.println(e);
-		}
+		super (filename, FILE_PATH);
 	}
 
 	public void sort() {
 		// ここを作る
 		// 挿入ソートを実装する
 		// 配列arrayの中身をソートする
-//		for (int i = 1; i < n; i++) {
-//			int j = i;
-//			while (j > 0 && array[j - 1] > array[j]) {
-//				int t = array[j];
-//				array[j] = array[j - 1];
-//				array[j - 1] = t;
-//				j--;
-//			}
-//		}
 		for (int i = 1; i < n; i++) {
 			int j = i;
-			int t = array[i];
-			while (j > 0 && array[j - 1] > t) {
-				array[j] = array[j - 1];
+			int t = a[i];
+			while (j > 0 && a[j - 1] > t) {
+				a[j] = a[j - 1];
 				j--;
 			}
-			array[j] = t;
-		}
-	}
-
-	public void output(String filename) {
-		// ここを作る
-		// ファイル名を引数とする
-		// 配列arrayをファイルに出力する
-		// 1行に1レコード
-		try {
-			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(new File(file_path + filename))));
-			for (int i : this.array) {
-				pw.println(i);
-			}
-			pw.close();
-		} catch (IOException e) {
-			// TODO catch block
-			e.printStackTrace();
+			a[j] = t;
 		}
 	}
 

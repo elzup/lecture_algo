@@ -1,37 +1,18 @@
 package ex13;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import ex12.Sort;
 
-public class QuickSort {
+public class QuickSort extends Sort{
 	private final int n = 50000;
 	private int[] a = new int[n];
 
-	private String file_path = "src/ex13/data/";
+	private static String FILE_PATH = "src/ex13/data/";
 
 	public QuickSort(String filename) {
 		// ここを作る
 		// ファイル名を引数とする
 		// ファイルを開いて全て読み込んで配列aに入れる
-		try {
-			// ここを作る
-			BufferedReader br = new BufferedReader(new FileReader(new File(file_path + filename)));
-			String k;
-			for (int i = 0; i < n; i++) {
-				k = br.readLine();
-				this.a[i] = Integer.parseInt(k);
-			}
-		} catch (FileNotFoundException e) {
-			System.out.println(filename + "が見つかりません。");
-		} catch (IOException e) {
-			System.out.println(e);
-		}
+		super(filename, FILE_PATH);
 	}
 
 	private int partition(int l, int r) {
@@ -41,27 +22,29 @@ public class QuickSort {
 		int ps = l;
 		int pe = r - 1;
 		int pivot = 0;
-		while (true) {
-			while (a[ps] <= pivot_value && ps < pe) {
-				ps++;
-			}
-			if (ps == pe) {
-				pivot = ps + 1;
-				break;
-			}
-			while (a[pe] >= pivot_value && ps < pe) {
-				pe--;
-			}
-			if (ps == pe) {
-				pivot = ps;
-				break;
-			}
-			int t = a[ps];
-			a[ps] = a[pe];
-			a[pe] = t;
-			if (ps + 1 == pe) {
-				pivot = pe;
-				break;
+		if (r - l == 1)
+			pivot = (a[l] > a[r] ? l : r);
+		else {
+			while (true) {
+				while (a[ps] <= pivot_value && ps < pe)
+					ps++;
+				if (ps == pe) {
+					pivot = ps + 1;
+					break;
+				}
+				while (a[pe] >= pivot_value && ps < pe)
+					pe--;
+				if (ps == pe) {
+					pivot = ps;
+					break;
+				}
+				int t = a[ps];
+				a[ps] = a[pe];
+				a[pe] = t;
+				if (ps + 1 == pe) {
+					pivot = pe;
+					break;
+				}
 			}
 		}
 		a[r] = a[pivot];
@@ -76,7 +59,6 @@ public class QuickSort {
 		if (r - l <= 0)
 			return;
 		int pivot = this.partition(l, r);
-		System.out.println(pivot);
 		quicksort(l, pivot);
 		quicksort(pivot + 1, r);
 	}
@@ -85,30 +67,12 @@ public class QuickSort {
 		quicksort(0, a.length - 1);
 	}
 
-	public void output(String filename) {
-		// ここを作る
-		// ファイル名を引数とする
-		// 配列arrayをファイルに出力する
-		// 1行に1レコード
-		try {
-			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(new File(file_path + filename))));
-			for (int i : this.a) {
-				pw.println(i);
-			}
-			pw.close();
-		} catch (IOException e) {
-			// TODO catch block
-			e.printStackTrace();
-		}
-	}
-
 	public static void main(String[] args) {
-		String file1 = "rand2.txt";
+		String file1 = "sorted2.txt";
 		String file2 = "rand2_result_quick.txt";
 
 		QuickSort qs = new QuickSort(file1);
 		qs.sort();
 		qs.output(file2);
-		System.out.println("end");
 	}
 }

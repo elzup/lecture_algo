@@ -13,7 +13,7 @@ public class TestSort {
 		// 各アルゴリズムでソートする際に，その処理時間を測定する
 
 		// ここに処理時間を計測する処理を書く
-		String[] filenames = "rand2.txt,reverse2.txt,sorted2.txt,same2.txt".split(",");
+		String[] filenames = {file1, file2, file3, file4};
 
 		for (String filename : filenames) {
 			System.out.println(filename + "のソート");
