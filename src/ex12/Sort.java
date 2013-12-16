@@ -37,7 +37,7 @@ public abstract class Sort {
 	public void output(String filename) {
 		try {
 			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(new File(file_path + filename))));
-			for (int i: this.a) {
+			for (int i : this.a) {
 				pw.println(i);
 			}
 			pw.close();
