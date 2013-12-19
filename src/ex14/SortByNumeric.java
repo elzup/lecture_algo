@@ -45,7 +45,6 @@ class NumericComparator implements Comparator<String> {
 
 	@Override
 	public int compare(String o1, String o2) {
-		// TODO method
 		return new Integer(o1).compareTo(Integer.parseInt(o2));
 	}
 }

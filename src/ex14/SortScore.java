@@ -61,8 +61,6 @@ class Score implements Comparable<Score> {
 		// 2. 数学が同点の場合は英語が良い順
 		// 3. それでも順位が付かない場合は同位とする
 		int res_math = ((Integer)another.getMath()).compareTo(this.math);
-		if (res_math != 0) return res_math;
-
-		return ((Integer)another.getEnglish()).compareTo(this.english);
+		return res_math != 0 ? res_math : ((Integer)another.getEnglish()).compareTo(this.english);
 	}
 }
